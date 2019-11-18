@@ -13,7 +13,7 @@ function Nav() {
           <i
             className="fa fa-thermometer-empty"
             aria-hidden="true"
-            style={{ "padding-right": "5px" }}
+            style={{ paddingRight: "5px" }}
           ></i>
           <sup>&deg;</sup>C
         </button>

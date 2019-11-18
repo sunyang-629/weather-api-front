@@ -1,12 +1,12 @@
 import React from "react";
 import SectionLeft from "./SectionLeft";
-import SectionRight from "./SectionRight";
+import SectionRight2 from "./SectionRight2";
 
 function Main() {
   return (
     <main>
       <SectionLeft />
-      <SectionRight />
+      <SectionRight2 />
     </main>
   );
 }

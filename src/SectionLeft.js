@@ -7,7 +7,7 @@ function SectionLeft() {
   return (
     <section className="weather-condition">
       <div className="weather-condition__location">Brisbane</div>
-      <div style={{ "text-align": "center", "font-size": "14px" }}>Clear</div>
+      <div style={{ textAlign: "center", fontSize: "14px" }}>Clear</div>
       <div className="weather-condition__temp">19 c</div>
       <div className="weather-condition__desc">
         <div>
