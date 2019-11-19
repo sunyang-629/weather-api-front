@@ -1,9 +1,9 @@
 import React from "react";
-import IconUmberella from "./icon/icon-umberella.png";
-import IconWind from "./icon/icon-wind.png";
-import IconCompass from "./icon/icon-compass.png";
+import IconUmberella from "./../icon/icon-umberella.png";
+import IconWind from "./../icon/icon-wind.png";
+import IconCompass from "./../icon/icon-compass.png";
 
-function SectionLeft() {
+function WeatherCondition() {
   return (
     <section className="weather-condition">
       <div className="weather-condition__location">Brisbane</div>
@@ -27,4 +27,4 @@ function SectionLeft() {
   );
 }
 
-export default SectionLeft;
+export default WeatherCondition;

@@ -1,10 +1,49 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import { format } from "date-fns";
 import "./App.css";
 
-import Container from "./Container.js";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
+import Main from "./Components/Main";
+import Nav from "./Components/Nav";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      forecasts: [],
+      limit: 5
+    };
+  }
+
+  changeLimit = limit => {
+    this.setState({ limit });
+  };
+
+  componentDidMount() {
+    axios(
+      "https://jr-weather-api-sunyang.herokuapp.com/api/weather?city=brisbane&cc=au"
+    ).then(response => {
+      const forecasts = response.data.data.forecast
+        .slice(0, 10)
+        .map(forecast => {
+          const date = new Date(forecast.time * 1000);
+          const day = format(date, "EEE");
+          const time = format(date, "HH:mm");
+          return {
+            day,
+            time,
+            high: forecast.maxCelsius,
+            low: forecast.minCelsius
+          };
+        });
+      this.setState({ forecasts });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -24,7 +63,16 @@ class App extends React.Component {
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
         </Helmet>
-        <Container />
+        <div className="weather-channel__container">
+          <Header />
+          <Nav />
+          <Main
+            forecasts={this.state.forecasts.slice(0, this.state.limit)}
+            changeLimit={this.changeLimit}
+            limit={this.state.limit}
+          />
+          <Footer />
+        </div>
       </div>
     );
   }
