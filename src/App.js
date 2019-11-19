@@ -15,7 +15,9 @@ class App extends React.Component {
 
     this.state = {
       forecasts: [],
-      limit: 5
+      limit: 5,
+      current: {},
+      city: ""
     };
   }
 
@@ -25,7 +27,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios(
-      "https://jr-weather-api-sunyang.herokuapp.com/api/weather?city=brisbane&cc=au"
+      "https://jr-weather-api-sunyang.herokuapp.com/api/weather?city=beijing&cc=cn"
     ).then(response => {
       const forecasts = response.data.data.forecast
         .slice(0, 10)
@@ -40,7 +42,9 @@ class App extends React.Component {
             low: forecast.minCelsius
           };
         });
-      this.setState({ forecasts });
+      const current = response.data.data.current;
+      const city = response.data.data.city.name;
+      this.setState({ forecasts, current, city });
     });
   }
 
@@ -70,6 +74,8 @@ class App extends React.Component {
             forecasts={this.state.forecasts.slice(0, this.state.limit)}
             changeLimit={this.changeLimit}
             limit={this.state.limit}
+            current={this.state.current}
+            city={this.state.city}
           />
           <Footer />
         </div>

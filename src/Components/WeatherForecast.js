@@ -1,30 +1,7 @@
 import React from "react";
-import axios from "axios";
-import { format } from "date-fns";
 import ForecastRow from "./ForecastRow";
 
 class WeatherForecast extends React.Component {
-  // componentDidMount() {
-  //   axios(
-  //     "https://jr-weather-api-sunyang.herokuapp.com/api/weather?city=brisbane&cc=au"
-  //   ).then(response => {
-  //     const forecasts = response.data.data.forecast
-  //       .slice(0, 10)
-  //       .map(forecast => {
-  //         const date = new Date(forecast.time * 1000);
-  //         const day = format(date, "EEE");
-  //         const time = format(date, "HH:mm");
-  //         return {
-  //           day,
-  //           time,
-  //           high: forecast.maxCelsius,
-  //           low: forecast.minCelsius
-  //         };
-  //       });
-  //     this.setState({ forecasts });
-  //   });
-  // }
-
   render() {
     return (
       <section className="weather-forecast">
