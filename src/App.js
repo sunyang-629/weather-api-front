@@ -31,6 +31,12 @@ class App extends React.Component {
     this.setState({ input: event.target.value });
   };
 
+  toggleUnit = () => {
+    this.setState(state => ({
+      unit: state.unit === "C" ? "F" : "C"
+    }));
+  };
+
   searchCity = () => {
     getWeatherFor(this.state.input).then(this.updateWeather);
   };
@@ -71,6 +77,8 @@ class App extends React.Component {
             inputValue={this.state.input}
             changeInput={this.changeInput}
             searchCity={this.searchCity}
+            toggleUnit={this.toggleUnit}
+            unit={this.state.unit}
           />
           <Main
             forecasts={this.state.forecasts.slice(0, this.state.limit)}
