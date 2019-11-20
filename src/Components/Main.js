@@ -5,7 +5,7 @@ import WeatherCondition from "./WeatherCondition";
 function Main(props) {
   return (
     <main>
-      <WeatherCondition current={props.current} city={props.city} />
+      <WeatherCondition current={props.current} cityName={props.cityName} />
       <WeatherForecast
         forecasts={props.forecasts}
         changeLimit={props.changeLimit}

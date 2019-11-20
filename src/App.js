@@ -1,8 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { format } from "date-fns";
 import "./App.css";
+import { getWeatherFor } from "./utils/axios";
 
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -17,7 +17,9 @@ class App extends React.Component {
       forecasts: [],
       limit: 5,
       current: {},
-      city: ""
+      cityName: "",
+      input: "",
+      unit: "C"
     };
   }
 
@@ -25,27 +27,23 @@ class App extends React.Component {
     this.setState({ limit });
   };
 
+  changeInput = event => {
+    this.setState({ input: event.target.value });
+  };
+
+  searchCity = () => {
+    getWeatherFor(this.state.input).then(this.updateWeather);
+  };
+
+  updateWeather = response => {
+    const forecasts = response.data.data.forecast.slice(0, 10);
+    const current = response.data.data.current;
+    const cityName = response.data.data.city.name;
+    this.setState({ forecasts, current, cityName });
+  };
+
   componentDidMount() {
-    axios(
-      "https://jr-weather-api-sunyang.herokuapp.com/api/weather?city=beijing&cc=cn"
-    ).then(response => {
-      const forecasts = response.data.data.forecast
-        .slice(0, 10)
-        .map(forecast => {
-          const date = new Date(forecast.time * 1000);
-          const day = format(date, "EEE");
-          const time = format(date, "HH:mm");
-          return {
-            day,
-            time,
-            high: forecast.maxCelsius,
-            low: forecast.minCelsius
-          };
-        });
-      const current = response.data.data.current;
-      const city = response.data.data.city.name;
-      this.setState({ forecasts, current, city });
-    });
+    getWeatherFor("Brisbane").then(this.updateWeather);
   }
 
   render() {
@@ -69,13 +67,18 @@ class App extends React.Component {
         </Helmet>
         <div className="weather-channel__container">
           <Header />
-          <Nav />
+          <Nav
+            inputValue={this.state.input}
+            changeInput={this.changeInput}
+            searchCity={this.searchCity}
+          />
           <Main
             forecasts={this.state.forecasts.slice(0, this.state.limit)}
             changeLimit={this.changeLimit}
             limit={this.state.limit}
             current={this.state.current}
-            city={this.state.city}
+            cityName={this.state.cityName}
+            unit={this.state.unit}
           />
           <Footer />
         </div>

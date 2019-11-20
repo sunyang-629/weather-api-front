@@ -6,7 +6,7 @@ import IconCompass from "./../icon/icon-compass.png";
 function WeatherCondition(props) {
   return (
     <section className="weather-condition">
-      <div className="weather-condition__location">{props.city}</div>
+      <div className="weather-condition__location">{props.cityName}</div>
       <div style={{ textAlign: "center", fontSize: "14px" }}>
         {props.current.weather}
       </div>

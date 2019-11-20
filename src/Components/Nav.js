@@ -1,11 +1,15 @@
 import React from "react";
 
-function Nav() {
+function Nav(props) {
   return (
     <nav>
       <div style={{ flex: 1 }}>
-        <input className="search-input" />
-        <button className="search-btn">
+        <input
+          onChange={props.changeInput}
+          className="search-input"
+          value={props.inputValue}
+        />
+        <button onClick={props.searchCity} className="search-btn">
           <i className="fa fa-search"></i>
         </button>
 
