@@ -15,7 +15,7 @@ class App extends React.Component {
 
     this.state = {
       forecasts: [],
-      limit: 5,
+      // limit: 5,
       current: {},
       cityName: "",
       input: "",
