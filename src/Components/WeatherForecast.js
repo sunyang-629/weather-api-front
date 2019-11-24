@@ -3,18 +3,18 @@ import { format } from "date-fns";
 import ForecastRow from "./ForecastRow";
 
 import { connect } from "react-redux";
-import { changeLimitAction } from "./action";
+import { changeLimitAction } from "./../redux/weatherAction";
 
 class WeatherForecast extends React.Component {
   render() {
-    const { limit, unit } = this.props;
+    const { changeLimit, limit, unit } = this.props;
     const forecasts = this.props.forecasts.slice(0, limit);
 
     return (
       <section className="weather-forecast">
         <div className="forecast__switch">
           <button
-            onClick={() => this.props.changeLimit(5)}
+            onClick={() => changeLimit(5)}
             className={`forecast__switch_0  ${
               this.props.limit === 5 ? "switch-active" : ""
             }`}
@@ -22,7 +22,7 @@ class WeatherForecast extends React.Component {
             5 items
           </button>
           <button
-            onClick={() => this.props.changeLimit(10)}
+            onClick={() => changeLimit(10)}
             className={`forecast__switch_1  ${
               this.props.limit === 10 ? "switch-active" : ""
             }`}
@@ -51,7 +51,7 @@ class WeatherForecast extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  limit: state.forecast.limit
+  limit: state.weather.limit
 });
 
 const mapDispatchToProps = dispath => ({

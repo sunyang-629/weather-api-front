@@ -15,17 +15,12 @@ class App extends React.Component {
 
     this.state = {
       forecasts: [],
-      // limit: 5,
       current: {},
       cityName: "",
       input: "",
       unit: "C"
     };
   }
-
-  // changeLimit = limit => {
-  //   this.setState({ limit });
-  // };
 
   changeInput = event => {
     this.setState({ input: event.target.value });
@@ -82,8 +77,6 @@ class App extends React.Component {
           />
           <Main
             forecasts={this.state.forecasts.slice(0, this.state.limit)}
-            changeLimit={this.changeLimit}
-            limit={this.state.limit}
             current={this.state.current}
             cityName={this.state.cityName}
             unit={this.state.unit}

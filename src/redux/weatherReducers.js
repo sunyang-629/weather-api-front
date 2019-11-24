@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
+// import { combineReducers } from "redux";
 
 const initialState = {
   limit: 5
 };
 
-export const forecast = (state = initialState, action) => {
+const forecast = (state = initialState, action) => {
   switch (action.type) {
     case "CHANGE_LIMIT":
       return {
@@ -16,6 +16,8 @@ export const forecast = (state = initialState, action) => {
   }
 };
 
-export default combineReducers({ forecast });
+export default forecast;
+
+// export default combineReducers({ forecast });
 
 //forecast (state name):forecast (export )

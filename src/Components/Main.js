@@ -13,8 +13,6 @@ function Main(props) {
       />
       <WeatherForecast
         forecasts={props.forecasts}
-        changeLimit={props.changeLimit}
-        limit={props.limit}
         unit={props.unit}
       />
     </main>
