@@ -2,6 +2,9 @@ import React from "react";
 import { format } from "date-fns";
 import ForecastRow from "./ForecastRow";
 
+import { connect } from "react-redux";
+import { changeLimitAction } from "./action";
+
 class WeatherForecast extends React.Component {
   render() {
     const { limit, unit } = this.props;
@@ -33,7 +36,7 @@ class WeatherForecast extends React.Component {
           const time = format(date, "HH:mm");
           return (
             <ForecastRow
-              key={forecast.day + forecast.time}
+              key={"forecast.day" + forecast.time}
               day={day}
               high={unit === "C" ? forecast.maxCelsius : forecast.maxFahrenheit}
               low={unit === "C" ? forecast.minCelsius : forecast.minFahrenheit}
@@ -47,4 +50,12 @@ class WeatherForecast extends React.Component {
   }
 }
 
-export default WeatherForecast;
+const mapStateToProps = state => ({
+  limit: state.forecast.limit
+});
+
+const mapDispatchToProps = dispath => ({
+  changeLimit: limit => dispath(changeLimitAction(limit))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherForecast);

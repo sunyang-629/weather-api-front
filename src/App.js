@@ -23,9 +23,9 @@ class App extends React.Component {
     };
   }
 
-  changeLimit = limit => {
-    this.setState({ limit });
-  };
+  // changeLimit = limit => {
+  //   this.setState({ limit });
+  // };
 
   changeInput = event => {
     this.setState({ input: event.target.value });
