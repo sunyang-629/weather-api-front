@@ -16,7 +16,7 @@ class WeatherForecast extends React.Component {
           <button
             onClick={() => changeLimit(5)}
             className={`forecast__switch_0  ${
-              this.props.limit === 5 ? "switch-active" : ""
+              limit === 5 ? "switch-active" : ""
             }`}
           >
             5 items
@@ -24,7 +24,7 @@ class WeatherForecast extends React.Component {
           <button
             onClick={() => changeLimit(10)}
             className={`forecast__switch_1  ${
-              this.props.limit === 10 ? "switch-active" : ""
+              limit === 10 ? "switch-active" : ""
             }`}
           >
             10 items

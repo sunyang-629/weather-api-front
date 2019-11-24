@@ -36,10 +36,10 @@ class App extends React.Component {
     getWeatherFor(this.state.input).then(this.updateWeather);
   };
 
-  updateWeather = response => {
-    const forecasts = response.data.data.forecast.slice(0, 10);
-    const current = response.data.data.current;
-    const cityName = response.data.data.city.name;
+  updateWeather = data => {
+    const forecasts = data.forecast.slice(0, 10);
+    const current = data.current;
+    const cityName = data.city.name;
     this.setState({ forecasts, current, cityName });
   };
 
