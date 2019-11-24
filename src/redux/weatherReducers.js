@@ -5,6 +5,8 @@ const initialState = {
   forecasts: [],
   current: {},
   cityName: "",
+  isLoading: false,
+  error:null
 };
 
 const forecast = (state = initialState, action) => {
@@ -14,16 +16,29 @@ const forecast = (state = initialState, action) => {
         ...state,
         limit: action.limit
       };
+    case "FETCH_DATA":
+      return {
+        ...state,
+        isLoading:true
+      }
     case "FETCH_DATA_SUCCESS":
         const forecasts = action.data.forecast.slice(0, 10);
         const current = action.data.current;
         const cityName = action.data.city.name;
       return {
         ...state,
+        isLoading:false,
         forecasts,
         current,
         cityName
-      };  
+      };
+    case "FETCH_DATA_FAILURE":
+      return {
+        ...state,
+        error: action.error,
+        isLoading:false
+      }
+
     default:
       return state;
   }

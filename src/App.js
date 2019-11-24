@@ -2,7 +2,9 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import "./App.css";
+import { connect } from "react-redux";
 import { getWeatherFor } from "./utils/axios";
+import { fetchDataThunkAction } from "./redux/weatherAction";
 
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -14,9 +16,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      forecasts: [],
-      current: {},
-      cityName: "",
+      // forecasts: [],
+      // current: {},
+      // cityName: "",
       input: "",
       unit: "C"
     };
@@ -36,15 +38,15 @@ class App extends React.Component {
     getWeatherFor(this.state.input).then(this.updateWeather);
   };
 
-  updateWeather = data => {
-    const forecasts = data.forecast.slice(0, 10);
-    const current = data.current;
-    const cityName = data.city.name;
-    this.setState({ forecasts, current, cityName });
-  };
+  // updateWeather = data => {
+  //   const forecasts = data.forecast.slice(0, 10);
+  //   const current = data.current;
+  //   const cityName = data.city.name;
+  //   this.setState({ forecasts, current, cityName });
+  // };
 
   componentDidMount() {
-    getWeatherFor("Brisbane").then(this.updateWeather);
+    this.props.fetchData('Brisbane')
   }
 
   render() {
@@ -76,9 +78,9 @@ class App extends React.Component {
             unit={this.state.unit}
           />
           <Main
-            forecasts={this.state.forecasts.slice(0, this.state.limit)}
-            current={this.state.current}
-            cityName={this.state.cityName}
+            // forecasts={this.state.forecasts.slice(0, this.state.limit)}
+            // current={this.state.current}
+            // cityName={this.state.cityName}
             unit={this.state.unit}
           />
           <Footer />
@@ -88,4 +90,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  fetchData: cityName => dispatch(fetchDataThunkAction(cityName))
+});
+
+export default connect(null, mapDispatchToProps)(App);
