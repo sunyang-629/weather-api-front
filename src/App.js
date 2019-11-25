@@ -30,11 +30,11 @@ class App extends React.Component {
     this.setState({ input: event.target.value });
   };
 
-  toggleUnit = () => {
-    this.setState(state => ({
-      unit: state.unit === "C" ? "F" : "C"
-    }));
-  };
+  // toggleUnit = () => {
+  //   this.setState(state => ({
+  //     unit: state.unit === "C" ? "F" : "C"
+  //   }));
+  // };
 
 
   renderMain = () => {

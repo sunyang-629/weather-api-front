@@ -6,7 +6,8 @@ const initialState = {
   current: {},
   cityName: "",
   isLoading: false,
-  error:null
+  error: null,
+  unit:"C"
 };
 
 const forecast = (state = initialState, action) => {
@@ -17,14 +18,12 @@ const forecast = (state = initialState, action) => {
         limit: action.limit
       };
     case "FETCH_DATA":
-      console.log("fetch");
       return {
         ...state,
         isLoading: true,
         error:null
       }
     case "FETCH_DATA_SUCCESS":
-      console.log('success');
         const forecasts = action.data.forecast.slice(0, 10);
         const current = action.data.current;
         const cityName = action.data.city.name;
@@ -40,6 +39,12 @@ const forecast = (state = initialState, action) => {
         ...state,
         error: action.error,
         isLoading:false
+      }
+    case "TOGGLE_UNIT":
+      const unit = state.unit === "C" ? "F" : "C"
+      return {
+        ...state,
+        unit
       }
 
     default:

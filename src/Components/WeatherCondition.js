@@ -5,26 +5,17 @@ import IconWind from "./../icon/icon-wind.png";
 import IconCompass from "./../icon/icon-compass.png";
 
 function WeatherCondition(props) {
-  const {
-    // cityName,
-    // current: {
-    //   maxCelsius,
-    //   maxFahrenheit,
-    //   humidity,
-    //   windSpeed,
-    //   windDirection,
-    //   weather
-    // },
-    unit
-  } = props;
+  // const {
+  //   unit
+  // } = props;
 
   return (
     <section className="weather-condition">
       <div className="weather-condition__location">{props.cityName}</div>
       <div style={{ textAlign: "center", fontSize: "14px" }}>{props.current.weather}</div>
       <div className="weather-condition__temp">
-        {unit === "C" ? props.current.maxCelsius : props.current.maxFahrenheit} <sup>&deg;</sup>
-        {unit}
+        {props.unit === "C" ? props.current.maxCelsius : props.current.maxFahrenheit} <sup>&deg;</sup>
+        {props.unit}
       </div>
       <div className="weather-condition__desc">
         <div>
@@ -46,7 +37,8 @@ function WeatherCondition(props) {
 
 const mapStateToProps = state => ({
   cityName: state.weather.cityName,
-  current: state.weather.current
+  current: state.weather.current,
+  unit:state.weather.unit
 })
 
 export default connect(mapStateToProps)(WeatherCondition);

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { toggleUnitAction } from "./../redux/navigationAction";
 
 function Nav(props) {
   const toggleUnit = props.unit === "C" ? "F" : "C";
@@ -21,11 +23,20 @@ function Nav(props) {
             style={{ paddingRight: "5px" }}
           ></i>
           <sup>&deg;</sup>
-          {toggleUnit}
+          {[props.toToggleUnit]}
         </button>
       </div>
     </nav>
   );
 }
 
-export default Nav;
+const mapStateToProps = state => ({
+  unit: state.weather.unit,
+  toToggleUnit:state.weather.unit === "C" ? "F" : "C"
+})
+
+const mapDispatchToProps = dispatch => ({
+  toggleUnit:() => dispatch(toggleUnitAction())
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Nav);
