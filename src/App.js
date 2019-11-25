@@ -1,15 +1,17 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+// import axios from "axios";
 import "./App.css";
 import { connect } from "react-redux";
-import { getWeatherFor } from "./utils/axios";
+// import { getWeatherFor } from "./utils/axios";
 import { fetchDataThunkAction } from "./redux/weatherAction";
 
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Nav from "./Components/Nav";
+import Loader from "./Components/Loader"
+import Error from "./Components/Error"
 
 class App extends React.Component {
   constructor(props) {
@@ -34,19 +36,17 @@ class App extends React.Component {
     }));
   };
 
-  searchCity = () => {
-    getWeatherFor(this.state.input).then(this.updateWeather);
-  };
 
-  // updateWeather = data => {
-  //   const forecasts = data.forecast.slice(0, 10);
-  //   const current = data.current;
-  //   const cityName = data.city.name;
-  //   this.setState({ forecasts, current, cityName });
+  renderMain = () => {
+    if (this.props.hasError) return <Error />
+    return <Main unit={this.state.unit} />
+  }
+  // searchCity = () => {
+  //   getWeatherFor(this.state.input).then(this.updateWeather);
   // };
 
   componentDidMount() {
-    this.props.fetchData('Brisbane')
+    this.props.fetchWeather('sydney')
   }
 
   render() {
@@ -77,12 +77,7 @@ class App extends React.Component {
             toggleUnit={this.toggleUnit}
             unit={this.state.unit}
           />
-          <Main
-            // forecasts={this.state.forecasts.slice(0, this.state.limit)}
-            // current={this.state.current}
-            // cityName={this.state.cityName}
-            unit={this.state.unit}
-          />
+          {this.props.isLoading ? <Loader /> : this.renderMain()}
           <Footer />
         </div>
       </div>
@@ -90,8 +85,13 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isLoading: state.weather.isLoading,
+  hasError:!!state.weather.error
+})
+
 const mapDispatchToProps = dispatch => ({
-  fetchData: cityName => dispatch(fetchDataThunkAction(cityName))
+  fetchWeather: cityName => dispatch(fetchDataThunkAction(cityName))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

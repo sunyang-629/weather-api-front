@@ -17,11 +17,14 @@ const forecast = (state = initialState, action) => {
         limit: action.limit
       };
     case "FETCH_DATA":
+      console.log("fetch");
       return {
         ...state,
-        isLoading:true
+        isLoading: true,
+        error:null
       }
     case "FETCH_DATA_SUCCESS":
+      console.log('success');
         const forecasts = action.data.forecast.slice(0, 10);
         const current = action.data.current;
         const cityName = action.data.city.name;

@@ -33,7 +33,7 @@ function WeatherCondition(props) {
         </div>
         <div>
           <img src={IconWind} />
-          <span className="citem">{props.current.currentwindSpeed} km/h</span>
+          <span className="citem">{props.current.windSpeed} km/h</span>
         </div>
         <div>
           <img src={IconCompass} />

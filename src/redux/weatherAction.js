@@ -25,7 +25,7 @@ export const fetchDataFailure = error => ({
 })
 
 export const fetchDataThunkAction = cityName => dispatch => {
-  dispatch(fetchData);
+  dispatch(fetchData());
   getWeatherFor(cityName)
     .then(data => dispatch(fetchDataSuccess(data)))
     .catch(error => dispatch(fetchDataFailure(error)));
