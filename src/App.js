@@ -1,10 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-// import axios from "axios";
 import "./App.css";
 import { connect } from "react-redux";
-// import { getWeatherFor } from "./utils/axios";
-import { fetchDataThunkAction } from "./redux/weatherAction";
+import { fetchDataThunkAction } from "./redux/navigationAction";
 
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -14,36 +12,11 @@ import Loader from "./Components/Loader"
 import Error from "./Components/Error"
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // forecasts: [],
-      // current: {},
-      // cityName: "",
-      input: "",
-      unit: "C"
-    };
-  }
-
-  changeInput = event => {
-    this.setState({ input: event.target.value });
-  };
-
-  // toggleUnit = () => {
-  //   this.setState(state => ({
-  //     unit: state.unit === "C" ? "F" : "C"
-  //   }));
-  // };
-
 
   renderMain = () => {
     if (this.props.hasError) return <Error />
-    return <Main unit={this.state.unit} />
+    return <Main unit={this.props.unit} />
   }
-  // searchCity = () => {
-  //   getWeatherFor(this.state.input).then(this.updateWeather);
-  // };
 
   componentDidMount() {
     this.props.fetchWeather('sydney')
@@ -70,13 +43,7 @@ class App extends React.Component {
         </Helmet>
         <div className="weather-channel__container">
           <Header />
-          <Nav
-            inputValue={this.state.input}
-            changeInput={this.changeInput}
-            searchCity={this.searchCity}
-            toggleUnit={this.toggleUnit}
-            unit={this.state.unit}
-          />
+          <Nav />
           {this.props.isLoading ? <Loader /> : this.renderMain()}
           <Footer />
         </div>

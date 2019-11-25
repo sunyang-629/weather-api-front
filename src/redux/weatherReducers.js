@@ -7,7 +7,8 @@ const initialState = {
   cityName: "",
   isLoading: false,
   error: null,
-  unit:"C"
+  unit: "C",
+  input:""
 };
 
 const forecast = (state = initialState, action) => {
@@ -46,7 +47,11 @@ const forecast = (state = initialState, action) => {
         ...state,
         unit
       }
-
+    case "SET_SEARCH_CITY_NAME":
+      return {
+        ...state,
+        input:action.city
+      }
     default:
       return state;
   }

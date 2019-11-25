@@ -5,9 +5,6 @@ import IconWind from "./../icon/icon-wind.png";
 import IconCompass from "./../icon/icon-compass.png";
 
 function WeatherCondition(props) {
-  // const {
-  //   unit
-  // } = props;
 
   return (
     <section className="weather-condition">

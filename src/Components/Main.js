@@ -6,15 +6,8 @@ import { prototype } from "events";
 function Main(props) {
   return (
     <main>
-      <WeatherCondition
-        // current={props.current}
-        // cityName={props.cityName}
-        unit={props.unit}
-      />
-      <WeatherForecast
-        // forecasts={props.forecasts}s
-        unit={props.unit}
-      />
+      <WeatherCondition />
+      <WeatherForecast />
     </main>
   );
 }

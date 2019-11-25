@@ -1,4 +1,4 @@
-import { getWeatherFor } from "./../utils/axios";
+// import { getWeatherFor } from "./../utils/axios";
 
 const CHANGE_LIMIT = "CHANGE_LIMIT";
 const FETCH_DATA = "FETCH_DATA";
@@ -24,9 +24,9 @@ export const fetchDataFailure = error => ({
   type: FETCH_DATA_FAILURE
 })
 
-export const fetchDataThunkAction = cityName => dispatch => {
-  dispatch(fetchData());
-  getWeatherFor(cityName)
-    .then(data => dispatch(fetchDataSuccess(data)))
-    .catch(error => dispatch(fetchDataFailure(error)));
- };
+// export const fetchDataThunkAction = cityName => dispatch => {
+//   dispatch(fetchData());
+//   getWeatherFor(cityName)
+//     .then(data => dispatch(fetchDataSuccess(data)))
+//     .catch(error => dispatch(fetchDataFailure(error)));
+//  };
