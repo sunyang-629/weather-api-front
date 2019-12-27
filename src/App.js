@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchWeather('sydney')
+    this.props.fetchWeather('brisbane')
   }
 
   render() {
